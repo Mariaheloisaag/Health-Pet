@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
       drawer: Drawer(
         child: Container(
           color: Colors.white,
+          // Menu
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
@@ -141,34 +142,41 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildServiceButton(String label, String iconPath, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(10),
-      child: Container(
-        padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.green, width: 0.8),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              iconPath,
-              height: 70,
-              fit: BoxFit.contain,
-            ),
-            const SizedBox(height: 5),
-            Text(
-              label,
-              style: TextStyle(
-                color: Colors.green[900],
-                fontSize: 18,
+    Widget _buildServiceButton(String label, String iconPath, VoidCallback onTap) {
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(6),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(6),
+        splashColor: Colors.green,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.green, width: 1.5),
+            borderRadius: BorderRadius.circular(6),
+            color: Colors.white,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                iconPath,
+                height: 60,
+                fit: BoxFit.contain,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+              const SizedBox(height: 5),
+              Text(
+                label,
+                style: TextStyle(
+                  color: Colors.green[900],
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );
