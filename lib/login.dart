@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart'; // ajuste o caminho conforme necessário
+import 'main.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
