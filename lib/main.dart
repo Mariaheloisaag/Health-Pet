@@ -183,7 +183,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-
 class ServiceDetailScreen extends StatelessWidget {
   final String title;
   final String imagePath;
