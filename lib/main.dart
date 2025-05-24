@@ -9,8 +9,8 @@ void main() {
 }
 
 class HomeScreen extends StatelessWidget {
-   const HomeScreen({super.key});
-   
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,6 +174,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 
 class ServiceDetailScreen extends StatelessWidget {
   final String title;

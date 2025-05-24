@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_base_page/login.dart';
+import 'package:flutter_base_page/main.dart';
 
 void main() {
   testWidgets('HomeScreen renders AppBar and BottomNavigationBar', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: HomeScreen()));
     await tester.pumpWidget(MaterialApp(home: LoginScreen()));
 
     // Verifica se a AppBar existe

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 
+void main() {
+  runApp(const LoginScreen());
+}
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -67,10 +71,19 @@ class _LoginScreenState extends State<LoginScreen> {
                               : Icons.visibility,
                         ),
                         onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
+                          if (_emailController.text.isNotEmpty &&
+                              _passwordController.text.isNotEmpty) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => const HomeScreen()),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Preencha todos os campos.")),
+                            );
+                          }
                         },
+
                       ),
                     ),
                   ),
@@ -99,10 +112,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         if (_emailController.text.isNotEmpty &&
                             _passwordController.text.isNotEmpty) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const HomeScreen()),
-                          );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Preencha todos os campos.")),
