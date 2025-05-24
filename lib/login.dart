@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: LoginScreen(),
+  ));
+}
+
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -16,13 +29,12 @@ class LoginScreen extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.only(top: 100, bottom: 40),
               child: Center(
-                child: Image.asset('assets/logo_texto.jpg', height: 60), // imagem "Health Pet"
+                child: Image.asset('assets/logo_texto.jpg', height: 60),
               ),
             ),
             const SizedBox(height: 32),
-
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -34,21 +46,34 @@ class LoginScreen extends StatelessWidget {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                   ),
                   const SizedBox(height: 16),
                   const Text("Senha", style: TextStyle(fontSize: 16)),
                   const SizedBox(height: 8),
                   TextField(
-                    obscureText: true,
+                    obscureText: _obscurePassword,
                     decoration: InputDecoration(
                       hintText: "Digite sua senha",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      suffixIcon: Icon(Icons.visibility_off),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -56,7 +81,8 @@ class LoginScreen extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {},
-                      child: const Text("Esqueci minha senha", style: TextStyle(color: Colors.black)),
+                      child: const Text("Esqueci minha senha",
+                          style: TextStyle(color: Colors.black)),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -71,7 +97,8 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(24),
                         ),
                       ),
-                      child: const Text("Entrar", style: TextStyle(fontSize: 16)),
+                      child: const Text("Entrar",
+                          style: TextStyle(fontSize: 16, color: Colors.black)),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -81,8 +108,11 @@ class LoginScreen extends StatelessWidget {
                       const Text("Não tem conta? "),
                       GestureDetector(
                         onTap: () {},
-                        child: Text("Cadastre-se",
-                          style: TextStyle(color: Colors.green[700], fontWeight: FontWeight.bold),
+                        child: Text(
+                          "Cadastre-se",
+                          style: TextStyle(
+                              color: Colors.green[700],
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -112,14 +142,18 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSocialButton({required String logo, required String text, required VoidCallback onPressed}) {
+  Widget _buildSocialButton({
+    required String logo,
+    required String text,
+    required VoidCallback onPressed,
+  }) {
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
@@ -134,7 +168,8 @@ class LoginScreen extends StatelessWidget {
         children: [
           Image.asset(logo, height: 20),
           const SizedBox(width: 12),
-          Text(text, style: const TextStyle(fontSize: 15, color: Colors.black)),
+          Text(text,
+              style: const TextStyle(fontSize: 15, color: Colors.black)),
         ],
       ),
     );
