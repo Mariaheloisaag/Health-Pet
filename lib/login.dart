@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 
 void main() {
-  runApp(const LoginScreen());
+  runApp(MaterialApp(
+  debugShowCheckedModeBanner: false,
+  home: LoginScreen(),
+));
 }
 
 class LoginScreen extends StatefulWidget {
@@ -107,11 +110,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(24),
                         ),
                       ),
-                      child: const Text("Entrar",
-                          style: TextStyle(fontSize: 16, color: Colors.black)),
+                      child: const Text(
+                        "Entrar",
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
                       onPressed: () {
                         if (_emailController.text.isNotEmpty &&
                             _passwordController.text.isNotEmpty) {
+                          // Navegação ao precionar entrar para a tela de principal
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomeScreen()),
+                          );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Preencha todos os campos.")),

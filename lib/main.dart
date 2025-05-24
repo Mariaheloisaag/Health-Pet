@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'login.dart'; // <- Importa a tela de login
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: LoginScreen(),
+    home: LoginScreen(), // <- Começa na tela de login
   ));
 }
 
