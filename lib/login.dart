@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: LoginScreen(),
-  ));
-}
+import 'main.dart'; // ajuste o caminho conforme necessário
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,6 +9,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
   @override
@@ -27,9 +23,9 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               color: const Color(0xFFB2E898),
               width: double.infinity,
-              padding: const EdgeInsets.only(top: 100, bottom: 40),
+              padding: const EdgeInsets.only(top: 90, bottom: 40),
               child: Center(
-                child: Image.asset('assets/logo_texto.jpg', height: 60),
+                child: Image.asset('assets/logo_texto.jpg', height: 95),
               ),
             ),
             const SizedBox(height: 32),
@@ -41,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text("E-mail ou CPF", style: TextStyle(fontSize: 16)),
                   const SizedBox(height: 8),
                   TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       hintText: "Digite seu e-mail ou CPF",
                       border: OutlineInputBorder(
@@ -54,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text("Senha", style: TextStyle(fontSize: 16)),
                   const SizedBox(height: 8),
                   TextField(
+                    controller: _passwordController,
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
                       hintText: "Digite sua senha",
@@ -89,7 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green[800],
                         padding: const EdgeInsets.symmetric(vertical: 14),
@@ -99,6 +96,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       child: const Text("Entrar",
                           style: TextStyle(fontSize: 16, color: Colors.black)),
+                      onPressed: () {
+                        if (_emailController.text.isNotEmpty &&
+                            _passwordController.text.isNotEmpty) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomeScreen()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Preencha todos os campos.")),
+                          );
+                        }
+                      },
                     ),
                   ),
                   const SizedBox(height: 16),
