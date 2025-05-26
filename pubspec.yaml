@@ -21,3 +21,8 @@ flutter:
 
   assets:
     - assets/logo.png
+
+flutter:
+  assets:
+    - assets/amigo_pet.jpg
+    - assets/pet_love.jpg
