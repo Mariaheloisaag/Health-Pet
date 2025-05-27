@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
-  runApp(MaterialApp(
-  debugShowCheckedModeBanner: false,
-  home: LoginScreen(),
-));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Inicialização do Firebase
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: FirebaseAuth.instance.currentUser == null
+          ? const LoginScreen()
+          : const HomeScreen(),
+    );
+  }
 }
 
 class LoginScreen extends StatefulWidget {
@@ -41,17 +55,16 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("E-mail ou CPF", style: TextStyle(fontSize: 16)),
+                  const Text("E-mail", style: TextStyle(fontSize: 16)),
                   const SizedBox(height: 8),
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
-                      hintText: "Digite seu e-mail ou CPF",
+                      hintText: "Digite seu e-mail",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -65,28 +78,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                       suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
+                        icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
                         onPressed: () {
-                          if (_emailController.text.isNotEmpty &&
-                              _passwordController.text.isNotEmpty) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => const HomeScreen()),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("Preencha todos os campos.")),
-                            );
-                          }
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
                         },
-
                       ),
                     ),
                   ),
@@ -95,8 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {},
-                      child: const Text("Esqueci minha senha",
-                          style: TextStyle(color: Colors.black)),
+                      child: const Text("Esqueci minha senha", style: TextStyle(color: Colors.black)),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -114,20 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Entrar",
                         style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
-                      onPressed: () {
-                        if (_emailController.text.isNotEmpty &&
-                            _passwordController.text.isNotEmpty) {
-                          // Navegação ao precionar entrar para a tela de principal
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const HomeScreen()),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Preencha todos os campos.")),
-                          );
-                        }
-                      },
+                      onPressed: _login,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -178,6 +163,41 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  void _login() async {
+    final email = _emailController.text.trim();
+    final senha = _passwordController.text.trim();
+
+    if (email.isEmpty || senha.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Preencha todos os campos.")),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: senha,
+      );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    } on FirebaseAuthException catch (e) {
+      String mensagem = "Erro ao fazer login.";
+      if (e.code == 'user-not-found') {
+        mensagem = 'Usuário não encontrado.';
+      } else if (e.code == 'wrong-password') {
+        mensagem = 'Senha incorreta.';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(mensagem)),
+      );
+    }
+  }
+
   Widget _buildSocialButton({
     required String logo,
     required String text,
@@ -201,6 +221,18 @@ class _LoginScreenState extends State<LoginScreen> {
               style: const TextStyle(fontSize: 15, color: Colors.black)),
         ],
       ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Tela Principal')),
+      body: const Center(child: Text('Bem-vindo!')),
     );
   }
 }

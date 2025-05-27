@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'login.dart'; // <- Importa a tela de login
+import 'login.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: LoginScreen(), // <- Começa na tela de login
-  ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Inicializa o Firebase
+
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen(),
+    ),
+  );
 }
 
 class HomeScreen extends StatelessWidget {
@@ -79,16 +85,28 @@ class HomeScreen extends StatelessWidget {
                 childAspectRatio: 0.95,
                 children: [
                   _buildServiceButton('Vacina', 'assets/vacina.png', () {
-                    print('Vacina clicado');
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Vacina()),
+                    );*/
                   }),
                   _buildServiceButton('Adoção', 'assets/adocao.jpg', () {
-                    print('Adoção clicado');
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AdocaoPage()),
+                    );*/
                   }),
                   _buildServiceButton('Banho', 'assets/banho.jpg', () {
-                    print('Banho clicado');
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AgendarBanhoScreen()),
+                    );*/
                   }),
                   _buildServiceButton('Veterinário', 'assets/veterinario.jpg', () {
-                    print('Veterinário clicado');
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => VeterinarioPage()),
+                    );*/
                   }),
                 ],
               ),
