@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'cadastro.dart';
+import 'main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -33,6 +35,68 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
+
+  void login() async {
+    final email = _emailController.text.trim();
+    final senha = _passwordController.text.trim();
+
+    if (email.isEmpty || senha.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Preencha todos os campos.")),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: senha,
+      );
+
+      // Navegar para a HomeScreen após login
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    } on FirebaseAuthException catch (e) {
+      String mensagem = "Erro ao fazer login.";
+      if (e.code == 'user-not-found') {
+        mensagem = 'Usuário não encontrado.';
+      } else if (e.code == 'wrong-password') {
+        mensagem = 'Senha incorreta.';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(mensagem)),
+      );
+    }
+  }
+
+
+  Widget _buildSocialButton({
+    required String logo,
+    required String text,
+    required VoidCallback onPressed,
+  }) {
+    return OutlinedButton(
+      onPressed: onPressed,
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        side: const BorderSide(color: Colors.green),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(logo, height: 20),
+          const SizedBox(width: 12),
+          Text(text, style: const TextStyle(fontSize: 15, color: Colors.black)),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,22 +165,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green[800],
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green[800],
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
                         ),
-                        child: const Text(
-                          "Entrar",
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                        onPressed: () {
-                          login(); // chama o método de login que autentica no Firebase e navega se sucesso
-                        },
+                      ),
+                      onPressed: login,
+                      child: const Text(
+                        "Entrar",
+                        style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ),
+                  ),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -132,8 +194,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           "Cadastre-se",
                           style: TextStyle(
-                              color: Colors.green[700],
-                              fontWeight: FontWeight.bold),
+                            color: Colors.green[700],
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -167,84 +230,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  void login() async {
-    final email = _emailController.text.trim();
-    final senha = _passwordController.text.trim();
-
-    if (email.isEmpty || senha.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Preencha todos os campos.")),
-      );
-      return;
-    }
-
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: senha,
-      );
-
-     ElevatedButton(
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
-          );
-        },
-        child: const Text('Entrar'),
-      );
-    } on FirebaseAuthException catch (e) {
-      String mensagem = "Erro ao fazer login.";
-      if (e.code == 'user-not-found') {
-        mensagem = 'Usuário não encontrado.';
-      } else if (e.code == 'wrong-password') {
-        mensagem = 'Senha incorreta.';
-      }
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(mensagem)),
-      );
-    }
-  }
-
-  Widget _buildSocialButton({
-    required String logo,
-    required String text,
-    required VoidCallback onPressed,
-  }) {
-    return OutlinedButton(
-      onPressed: onPressed,
-      style: OutlinedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        side: const BorderSide(color: Colors.green),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(logo, height: 20),
-          const SizedBox(width: 12),
-          Text(text,
-              style: const TextStyle(fontSize: 15, color: Colors.black)),
-        ],
-      ),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Tela Principal')),
-      body: const Center(child: Text('Bem-vindo!')),
     );
   }
 }
