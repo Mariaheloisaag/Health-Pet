@@ -102,16 +102,24 @@ class HomeScreen extends StatelessWidget {
                 childAspectRatio: 0.95,
                 children: [
                   _buildServiceButton('Vacina', 'assets/vacina.png', () {
-                    print('Vacina clicado');
+                     /*Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AgendarBanhoScreen()),*/
                   }),
                   _buildServiceButton('Adoção', 'assets/adocao.jpg', () {
-                    print('Adoção clicado');
+                     /*Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AgendarBanhoScreen()),*/
                   }),
                   _buildServiceButton('Banho', 'assets/banho.jpg', () {
-                    print('Banho clicado');
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AgendarBanhoScreen()),*/
                   }),
                   _buildServiceButton('Veterinário', 'assets/veterinario.jpg', () {
-                    print('Veterinário clicado');
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AgendarBanhoScreen()),*/
                   }),
                 ],
               ),
