@@ -1,10 +1,28 @@
+import 'package:flutter/foundation.dart'; 
 import 'package:flutter/material.dart';
-import 'login.dart';
 import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+import 'login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // Inicializa o Firebase
+
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: "AIzaSyCvQhOvSTgnam7O5M6xG0oGYZsJIHAUa60",
+        authDomain: "sprint2-1de50.firebaseapp.com",
+        databaseURL: "https://sprint2-1de50-default-rtdb.firebaseio.com",
+        projectId: "sprint2-1de50",
+        storageBucket: "sprint2-1de50.appspot.com",
+        messagingSenderId: "713190668927",
+        appId: "1:713190668927:web:8edb44cbe7f70ecf8d9d4a",
+        measurementId: "G-9K9149NLYP",
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
 
   runApp(
     MaterialApp(

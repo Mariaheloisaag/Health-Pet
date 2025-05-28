@@ -5,8 +5,7 @@ import 'cadastro.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // Inicialização do Firebase
-  runApp(const MyApp());
+  await Firebase.initializeApp();
 }
 
 class MyApp extends StatelessWidget {
@@ -102,20 +101,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green[800],
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green[800],
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
                         ),
+                        child: const Text(
+                          "Entrar",
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        ),
+                        onPressed: () {
+                          login(); // chama o método de login que autentica no Firebase e navega se sucesso
+                        },
                       ),
-                      child: const Text(
-                        "Entrar",
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                      ),
-                      onPressed: _login,
                     ),
-                  ),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -169,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _login() async {
+  void login() async {
     final email = _emailController.text.trim();
     final senha = _passwordController.text.trim();
 
@@ -186,9 +187,14 @@ class _LoginScreenState extends State<LoginScreen> {
         password: senha,
       );
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+     ElevatedButton(
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
+        },
+        child: const Text('Entrar'),
       );
     } on FirebaseAuthException catch (e) {
       String mensagem = "Erro ao fazer login.";
