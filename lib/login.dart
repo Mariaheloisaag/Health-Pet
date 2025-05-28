@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'cadastro.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -120,8 +121,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text("Não tem conta? "),
-                      GestureDetector(
-                        onTap: () {},
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RegisterScreen()),
+                          );
+                        },
                         child: Text(
                           "Cadastre-se",
                           style: TextStyle(
