@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_base_page/login.dart';
-import 'package:flutter_base_page/main.dart';
+import 'package:flutter_base_page/paginaInicial.dart';
 
 void main() {
   testWidgets('HomeScreen renders AppBar and BottomNavigationBar', (WidgetTester tester) async {
