@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'visita_cancelada_page.dart'; // Importe a tela de visita cancelada
 
 class AgendamentoConfirmadoPage extends StatelessWidget {
-  const AgendamentoConfirmadoPage({super.key});
+  final String data;
+  final String hora;
+
+  const AgendamentoConfirmadoPage({
+    super.key,
+    required this.data,
+    required this.hora,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar personalizada
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
@@ -23,65 +30,64 @@ class AgendamentoConfirmadoPage extends StatelessWidget {
           ),
         ),
       ),
-
-      // Corpo da tela
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.check_circle,
-                color: Colors.green,
-                size: 80,
-              ),
+              const Icon(Icons.check_circle, color: Colors.green, size: 80),
               const SizedBox(height: 16),
               const Text(
                 'Agendamento Confirmado',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               const SizedBox(height: 8),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Vacina:', style: TextStyle(fontSize: 14)),
-                  Text('Data:', style: TextStyle(fontSize: 14)),
-                  Text('Local:', style: TextStyle(fontSize: 14)),
-                  Text('Horário:', style: TextStyle(fontSize: 14)),
+                  const Text('Vacina:', style: TextStyle(fontSize: 14)),
+                  Text('Data: $data', style: const TextStyle(fontSize: 14)),
+                  const Text('Local:', style: TextStyle(fontSize: 14)),
+                  Text('Horário: $hora', style: const TextStyle(fontSize: 14)),
                 ],
               ),
               const SizedBox(height: 32),
+
+              // Botão OK
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                   minimumSize: const Size(200, 45),
                 ),
                 onPressed: () {
-                  // ação de OK
+                  Navigator.popUntil(context, (route) => route.isFirst);
                 },
-                child: const Text('OK'),
+                child: const Text('OK', style: TextStyle(color: Colors.white)),
               ),
+
               const SizedBox(height: 12),
+
+              // Botão Cancelar Agendamento
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
                   minimumSize: const Size(200, 45),
                 ),
                 onPressed: () {
-                  // ação de cancelar
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const VisitaCanceladaPage(),
+                    ),
+                  );
                 },
-                child: const Text('Cancelar Agendamento'),
+                child: const Text('Cancelar Agendamento', style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
         ),
       ),
-
-      // BottomNavigationBar com logo central flutuante
       bottomNavigationBar: Stack(
         alignment: Alignment.center,
         children: [

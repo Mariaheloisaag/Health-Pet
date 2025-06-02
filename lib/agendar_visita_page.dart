@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'agendamento_confirmado_page.dart'; // importe a tela de confirmação
 
 class AgendarVisitaPage extends StatefulWidget {
   const AgendarVisitaPage({super.key});
@@ -14,7 +15,6 @@ class _AgendarVisitaPageState extends State<AgendarVisitaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar personalizada
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
@@ -37,7 +37,6 @@ class _AgendarVisitaPageState extends State<AgendarVisitaPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Voltar
             GestureDetector(
               onTap: () {
                 Navigator.pop(context);
@@ -52,7 +51,6 @@ class _AgendarVisitaPageState extends State<AgendarVisitaPage> {
             ),
             const SizedBox(height: 32),
 
-            // Título e subtítulo
             const Center(
               child: Column(
                 children: [
@@ -72,7 +70,6 @@ class _AgendarVisitaPageState extends State<AgendarVisitaPage> {
 
             const SizedBox(height: 40),
 
-            // Campo de data
             TextField(
               controller: _dataController,
               readOnly: true,
@@ -99,7 +96,6 @@ class _AgendarVisitaPageState extends State<AgendarVisitaPage> {
 
             const SizedBox(height: 20),
 
-            // Campo de hora
             TextField(
               controller: _horaController,
               readOnly: true,
@@ -123,11 +119,65 @@ class _AgendarVisitaPageState extends State<AgendarVisitaPage> {
 
             const SizedBox(height: 32),
 
-            // Botão confirmar
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Lógica para confirmar
+                  if (_dataController.text.isEmpty || _horaController.text.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text("Erro"),
+                        content: const Text("Por favor, preencha data e horário."),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text("OK"),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: Colors.green[100],
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.check_circle, color: Colors.green, size: 60),
+                            const SizedBox(height: 12),
+                            const Text(
+                              "Agendamento confirmado!",
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              "Data: ${_dataController.text}\nHora: ${_horaController.text}",
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context); // fecha o dialog
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AgendamentoConfirmadoPage(
+                                    data: _dataController.text,
+                                    hora: _horaController.text,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text("OK", style: TextStyle(color: Colors.green)),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[700],
@@ -144,7 +194,6 @@ class _AgendarVisitaPageState extends State<AgendarVisitaPage> {
         ),
       ),
 
-      // BottomNavigationBar
       bottomNavigationBar: Stack(
         alignment: Alignment.center,
         children: [
