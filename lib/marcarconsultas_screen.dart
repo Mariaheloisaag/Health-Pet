@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'agendas_screen.dart';
 
 class MarcarconsultasScreen extends StatefulWidget {
   const MarcarconsultasScreen({super.key});

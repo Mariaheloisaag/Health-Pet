@@ -1,7 +1,4 @@
   import 'package:flutter/material.dart';
-  import 'package:flutter_base_page/marcarconsultas_screen.dart';
-  import 'consultas_screen.dart';
-  import 'marcarconsultas_screen.dart';
 
   void main() {
     runApp(MaterialApp(
