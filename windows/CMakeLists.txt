@@ -1,6 +1,7 @@
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
 <<<<<<< HEAD
+<<<<<<< HEAD
 project(flutter_base_page LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
@@ -13,6 +14,13 @@ project(sprint2 LANGUAGES CXX)
 # the on-disk name of your application.
 set(BINARY_NAME "sprint2")
 >>>>>>> Pagina-Inicial
+=======
+project(projetoflutter LANGUAGES CXX)
+
+# The name of the executable created for the application. Change this to change
+# the on-disk name of your application.
+set(BINARY_NAME "projetoflutter")
+>>>>>>> visitacancelada
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.

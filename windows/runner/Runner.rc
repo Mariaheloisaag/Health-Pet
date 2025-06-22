@@ -91,6 +91,7 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
 <<<<<<< HEAD
+<<<<<<< HEAD
             VALUE "FileDescription", "flutter_base_page" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "flutter_base_page" "\0"
@@ -105,6 +106,14 @@ BEGIN
             VALUE "OriginalFilename", "sprint2.exe" "\0"
             VALUE "ProductName", "sprint2" "\0"
 >>>>>>> Pagina-Inicial
+=======
+            VALUE "FileDescription", "projetoflutter" "\0"
+            VALUE "FileVersion", VERSION_AS_STRING "\0"
+            VALUE "InternalName", "projetoflutter" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "projetoflutter.exe" "\0"
+            VALUE "ProductName", "projetoflutter" "\0"
+>>>>>>> visitacancelada
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

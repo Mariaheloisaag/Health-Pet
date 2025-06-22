@@ -41,6 +41,7 @@ static void my_application_activate(GApplication* application) {
     GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
     gtk_widget_show(GTK_WIDGET(header_bar));
 <<<<<<< HEAD
+<<<<<<< HEAD
     gtk_header_bar_set_title(header_bar, "flutter_base_page");
     gtk_header_bar_set_show_close_button(header_bar, TRUE);
     gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
@@ -53,6 +54,13 @@ static void my_application_activate(GApplication* application) {
   } else {
     gtk_window_set_title(window, "sprint2");
 >>>>>>> Pagina-Inicial
+=======
+    gtk_header_bar_set_title(header_bar, "projetoflutter");
+    gtk_header_bar_set_show_close_button(header_bar, TRUE);
+    gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
+  } else {
+    gtk_window_set_title(window, "projetoflutter");
+>>>>>>> visitacancelada
   }
 
   gtk_window_set_default_size(window, 1280, 720);
