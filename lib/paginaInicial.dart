@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'login.dart';
+import 'agendar_banho_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -112,9 +113,16 @@ class HomeScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => AgendarBanhoScreen()),*/
                   }),
                   _buildServiceButton('Banho', 'assets/banho.jpg', () {
-                    /*Navigator.push(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AgendarBanhoScreen()),*/
+                      MaterialPageRoute(
+                        builder: (context) => AgendarBanhoScreen(
+                          petshopNome: 'Pet Vida',
+                          servicoNome: 'Banho',
+                          preco: 49.90,
+                        ),
+                      ),
+                    );
                   }),
                   _buildServiceButton('Veterinário', 'assets/veterinario.jpg', () {
                     /*Navigator.push(
