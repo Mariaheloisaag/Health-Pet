@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'agendas_screen.dart';
 import 'package:flutter_base_page/models/consulta.dart';
 import 'package:flutter_base_page/db/consultas_database.dart';
 
