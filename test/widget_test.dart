@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_base_page/main.dart'; // nome correto do seu app
+// nome correto do seu app
+import 'package:flutter_base_page/login.dart';
 
 void main() {
   testWidgets('HomeScreen renders AppBar and BottomNavigationBar', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: HomeScreen()));
-
+    //await tester.pumpWidget(MaterialApp(home: HomeScreen()));
+    await tester.pumpWidget(MaterialApp(home: LoginScreen()));
     // Verifica se a AppBar existe
     expect(find.byType(AppBar), findsOneWidget);
 
@@ -19,6 +20,7 @@ void main() {
     expect(find.byIcon(Icons.home), findsOneWidget);
     expect(find.byIcon(Icons.search), findsOneWidget);
     expect(find.byType(ImageIcon), findsOneWidget); // ícone do meio (logo)
+    // expect(find.byType(ImageIcon), findsOneWidget); // REMOVIDO ou pode adaptar conforme a necessidade
     expect(find.byIcon(Icons.share), findsOneWidget);
     expect(find.byIcon(Icons.person), findsOneWidget);
   });
