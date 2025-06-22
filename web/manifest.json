@@ -1,6 +1,6 @@
 {
-    "name": "sprint2",
-    "short_name": "sprint2",
+    "name": "flutter_base_page",
+    "short_name": "flutter_base_page",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
