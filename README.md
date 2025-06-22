@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # flutter_base_page
-=======
-# sprint2
->>>>>>> Pagina-Inicial
 
 A new Flutter project.
 
