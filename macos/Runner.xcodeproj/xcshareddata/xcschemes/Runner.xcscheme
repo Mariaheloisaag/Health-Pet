@@ -16,10 +16,14 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "33CC10EC2044A3C60003C045"
 <<<<<<< HEAD
+<<<<<<< HEAD
                BuildableName = "flutter_base_page.app"
 =======
                BuildableName = "sprint2.app"
 >>>>>>> Pagina-Inicial
+=======
+               BuildableName = "projetoflutter.app"
+>>>>>>> visitacancelada
                BlueprintName = "Runner"
                ReferencedContainer = "container:Runner.xcodeproj">
             </BuildableReference>
@@ -36,10 +40,14 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
 <<<<<<< HEAD
+<<<<<<< HEAD
             BuildableName = "flutter_base_page.app"
 =======
             BuildableName = "sprint2.app"
 >>>>>>> Pagina-Inicial
+=======
+            BuildableName = "projetoflutter.app"
+>>>>>>> visitacancelada
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -75,10 +83,14 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
 <<<<<<< HEAD
+<<<<<<< HEAD
             BuildableName = "flutter_base_page.app"
 =======
             BuildableName = "sprint2.app"
 >>>>>>> Pagina-Inicial
+=======
+            BuildableName = "projetoflutter.app"
+>>>>>>> visitacancelada
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -96,10 +108,14 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33CC10EC2044A3C60003C045"
 <<<<<<< HEAD
+<<<<<<< HEAD
             BuildableName = "flutter_base_page.app"
 =======
             BuildableName = "sprint2.app"
 >>>>>>> Pagina-Inicial
+=======
+            BuildableName = "projetoflutter.app"
+>>>>>>> visitacancelada
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>

@@ -7,6 +7,7 @@
 #include "generated_plugin_registrant.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
 =======
@@ -19,4 +20,8 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
   FirebaseCorePluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FirebaseCorePluginCApi"));
 >>>>>>> Pagina-Inicial
+=======
+
+void RegisterPlugins(flutter::PluginRegistry* registry) {
+>>>>>>> visitacancelada
 }

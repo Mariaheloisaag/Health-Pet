@@ -6,10 +6,14 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<string>Flutter Base Page</string>
 =======
 	<string>Sprint2</string>
 >>>>>>> Pagina-Inicial
+=======
+	<string>Projetoflutter</string>
+>>>>>>> visitacancelada
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -18,10 +22,14 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<string>flutter_base_page</string>
 =======
 	<string>sprint2</string>
 >>>>>>> Pagina-Inicial
+=======
+	<string>projetoflutter</string>
+>>>>>>> visitacancelada
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
