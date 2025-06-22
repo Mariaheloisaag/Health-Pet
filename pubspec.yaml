@@ -10,10 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-
-  firebase_core: ^3.13.1
-  firebase_auth: ^5.5.4
-  http: ^1.4.0
+  sqflite: ^2.3.0
+  sqflite_common_ffi: ^2.3.0
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:
@@ -25,18 +24,3 @@ flutter:
 
   assets:
     - assets/logo.png
-
-flutter:
-  assets:
-    - assets/amigo_pet.jpg
-    - assets/pet_love.jpg
-    - assets/banho.jpg
-    - assets/logo.png
-    - assets/veterinario.jpg
-    - assets/osso.png
-    - assets/adocao.jpg
-    - assets/logo_texto.jpg
-    - assets/vacina.png
-    - assets/icons8-google-logo-48.png
-    - assets/icons8-mac-os-50.png
-
