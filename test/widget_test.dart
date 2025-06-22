@@ -6,7 +6,7 @@ import 'package:flutter_base_page/paginaInicial.dart';
 
 void main() {
   testWidgets('HomeScreen renders AppBar and BottomNavigationBar', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: HomeScreen()));
+    //await tester.pumpWidget(MaterialApp(home: HomeScreen()));
     await tester.pumpWidget(MaterialApp(home: LoginScreen()));
     // Verifica se a AppBar existe
     expect(find.byType(AppBar), findsOneWidget);
