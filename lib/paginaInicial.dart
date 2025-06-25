@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'login.dart';
 import 'agendar_banho_screen.dart';
+import 'agendar_visita_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -107,10 +108,11 @@ class HomeScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(builder: (context) => AgendarBanhoScreen()),*/
                   }),
-                  _buildServiceButton('Adoção', 'assets/adocao.jpg', () {
-                     /*Navigator.push(
+                 _buildServiceButton('Adoção', 'assets/adocao.jpg', () {
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AgendarBanhoScreen()),*/
+                      MaterialPageRoute(builder: (context) => const AgendarVisitaPage()),
+                    );
                   }),
                   _buildServiceButton('Banho', 'assets/banho.jpg', () {
                     Navigator.push(
