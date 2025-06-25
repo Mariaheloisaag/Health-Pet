@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart'; 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+
 import 'login.dart';
 import 'agendar_banho_screen.dart';
 import 'agendar_visita_page.dart';
@@ -38,7 +38,7 @@ void main() async {
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
       ),
 
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize: const Size.fromHeight(60),
         child: AppBar(
           backgroundColor: const Color(0xFFB2E898),
           elevation: 0,
@@ -105,11 +105,12 @@ class HomeScreen extends StatelessWidget {
                 childAspectRatio: 0.95,
                 children: [
                   _buildServiceButton('Vacina', 'assets/vacina.png', () {
-                     /*Navigator.push(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AgendarBanhoScreen()),*/
+                      MaterialPageRoute(builder: (context) => const ConsultasScreen()),
+                    );
                   }),
-                 _buildServiceButton('Adoção', 'assets/adocao.jpg', () {
+                  _buildServiceButton('Adoção', 'assets/adocao.jpg', () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const AgendarVisitaPage()),
@@ -127,10 +128,15 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   }),
-                  _buildServiceButton('Vacina', 'assets/vacina.png', () {
+                  _buildServiceButton('Veterinário', 'assets/veterinario.jpg', () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ConsultasScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => const ServiceDetailScreen(
+                          title: 'Veterinário',
+                          imagePath: 'assets/veterinario.jpg',
+                        ),
+                      ),
                     );
                   }),
                 ],
@@ -171,19 +177,44 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildDrawerItem(BuildContext context, String title, String imagePath) {
-    return ListTile(
-      leading: Image.asset(imagePath, height: 36),
-      title: Text(title, style: TextStyle(fontSize: 18, color: Colors.green[900])),
-      onTap: () {
-        Navigator.of(context).pop();
-        Navigator.of(context).push(
+  return ListTile(
+    leading: Image.asset(imagePath, height: 36),
+    title: Text(title, style: TextStyle(fontSize: 18, color: Colors.green[900])),
+    onTap: () {
+      Navigator.of(context).pop(); // fecha o drawer
+
+      if (title == 'Veterinário') {
+        // Vai direto para a tela de consultas
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ConsultasScreen()),
+        );
+      } else if (title == 'Adoção') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AgendarVisitaPage()),
+        );
+      } else if (title == 'Banho') {
+        Navigator.push(
+          context,
           MaterialPageRoute(
-            builder: (context) => ServiceDetailScreen(title: title, imagePath: imagePath),
+            builder: (context) => AgendarBanhoScreen(
+              petshopNome: 'Pet Vida',
+              servicoNome: 'Banho',
+              preco: 49.90,
+            ),
           ),
         );
-      },
-    );
-  }
+      } else if (title == 'Vacina') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ConsultasScreen()),
+        );
+      }
+    },
+  );
+}
+
 
   Widget _buildServiceButton(String label, String iconPath, VoidCallback onTap) {
     return InkWell(
@@ -198,11 +229,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              iconPath,
-              height: 70,
-              fit: BoxFit.contain,
-            ),
+            Image.asset(iconPath, height: 70, fit: BoxFit.contain),
             const SizedBox(height: 5),
             Text(
               label,
@@ -219,12 +246,12 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-
 class ServiceDetailScreen extends StatelessWidget {
   final String title;
   final String imagePath;
 
-  const ServiceDetailScreen({super.key, 
+  const ServiceDetailScreen({
+    super.key,
     required this.title,
     required this.imagePath,
   });

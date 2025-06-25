@@ -3,14 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   firebase_auth
   firebase_core
->>>>>>> Pagina-Inicial
-=======
->>>>>>> visitacancelada
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
