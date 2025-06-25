@@ -15,7 +15,7 @@ class PetshopsScreen extends StatelessWidget {
     },
   ];
 
-  const PetshopsScreen({super.key});
+PetshopsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

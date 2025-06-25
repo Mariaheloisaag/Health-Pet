@@ -11,13 +11,11 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
 
-<<<<<<< HEAD
+
   firebase_core: ^3.13.1
   firebase_auth: ^5.5.4
   http: ^1.4.0
 
-=======
->>>>>>> visitacancelada
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -27,7 +25,6 @@ flutter:
   uses-material-design: true
 
   assets:
-<<<<<<< HEAD
     - assets/logo.png
 
 flutter:
@@ -43,7 +40,3 @@ flutter:
     - assets/vacina.png
     - assets/icons8-google-logo-48.png
     - assets/icons8-mac-os-50.png
-
-=======
-    - assets/logo.png
->>>>>>> visitacancelada

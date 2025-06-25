@@ -1,4 +1,4 @@
-import 'package:sqflite/sqflite.dart';
+/*import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:flutter_base_page/models/consulta.dart';
 
@@ -47,4 +47,5 @@ class ConsultasDatabase {
     final db = await instance.database;
     await db.delete('consultas', where: 'id = ?', whereArgs: [id]);
   }
-}
+}*/
+
